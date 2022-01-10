@@ -73,7 +73,7 @@ A backend application for tracking leaves of Squad-Stack employees.
 
 5. clone the project.
 
-    - `git clone https://github.com/squadrun/django-project-boilerplate.git`
+    - `git clone https://github.com/squadrun/leaves-tracker.git`
 
 6. Create local settings file based on `local_example.py`
 
