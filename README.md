@@ -132,7 +132,10 @@ A backend application for tracking leaves of Squad-Stack employees.
 
 3. For any local Storage use /mnt/<Prefered Windows Drive>/
 
-4. Go through all the steps as Mentioned in Ubuntu.
+4. Follow all the steps mentioned in Ubuntu setup.
+
+### Note:
+- To Run the application/Installation you have to use the Ubuntu CLI.
 
 ## Miscellaneous
 1. For testing, you need to create a new db user with username and password as "postgres" as mentioned in test_settings.py . Also you need to use test_settings as your settings while running test cases
