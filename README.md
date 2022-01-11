@@ -124,23 +124,15 @@ A backend application for tracking leaves of Squad-Stack employees.
 
 5. Follow steps 5-11 of Ubuntu setup
 
-## Windows 
+## Windows with WSL
 
-1. Python 3.x Setup 
-   - Install Python from [link](https://www.python.org/downloads/).
-   - Install virtualenv with following command `pip3 install virtualenv`
-   
-2. PostgreSQL Setup
-   - Download from [link](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-   - Go through installation wizard and make sure to also select the pg-admin installation (included in the installer)
-3. RabbitMQ Setup 
-   - Download RabbitMQ Setup from [link](https://www.rabbitmq.com/install-windows.html#installer) and [ERLang](https://erlang.org/download/otp_versions_tree.html)
-   - Install Management console plugin [link](https://www.rabbitmq.com/management.html)
-   
-4. Redis Setup
-   - Use [Redis Cloud](https://redis.com/redis-enterprise-cloud/pricing) and create a free account.
+1. Install WSL from this [link](https://docs.microsoft.com/en-us/windows/wsl/install)
 
-5. Follow steps 5-11 of Ubuntu setup (use the VS Code or Text Editor Instead of vi/vim)
+2. Download Linux Distro from Microsoft Store (Ubuntu Recommended) [Ubuntu Link](https://www.microsoft.com/store/productId/9NBLGGH4MSV6)
+
+3. For any local Storage use /mnt/<Prefered Windows Drive>/
+
+4. Go through all the steps as Mentioned in Ubuntu.
 
 ## Miscellaneous
 1. For testing, you need to create a new db user with username and password as "postgres" as mentioned in test_settings.py . Also you need to use test_settings as your settings while running test cases
