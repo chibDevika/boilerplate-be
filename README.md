@@ -139,7 +139,8 @@ A backend application for tracking leaves of Squad-Stack employees.
    
 4. Redis Setup
    - Use [Redis Cloud](https://redis.com/redis-enterprise-cloud/pricing) and create a free account.
-   
+
+5. Follow steps 5-11 of Ubuntu setup (use the VS Code or Text Editor Instead of vi/vim)
 
 ## Miscellaneous
 1. For testing, you need to create a new db user with username and password as "postgres" as mentioned in test_settings.py . Also you need to use test_settings as your settings while running test cases
