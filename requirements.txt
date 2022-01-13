@@ -1,5 +1,5 @@
 aiohttp==3.8.1
-amqp==5.0.9
+amqp==2.5.2
 appdirs==1.4.4
 asgiref==3.4.1
 async-timeout==4.0.2
