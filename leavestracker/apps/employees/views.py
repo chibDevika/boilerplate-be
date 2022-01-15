@@ -1,12 +1,11 @@
-from django.http import request
 from django.shortcuts import render
-from rest_framework import viewsets
-from .models import User
-from .serializers import EmployeesSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from leavestracker.apps.employees.serializers import EmployeesSerializer
 
-class EmployeesViewSet(viewsets.ModelViewSet):
-    def create(self, request):
+class EmployeesView(APIView):
+    def post(self, request):
         serializer = EmployeesSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
-
+            return Response(serializer.data)

@@ -1,11 +1,6 @@
-# from django.urls import path, include
-# # from django.conf.urls import url, include
-# from . import views
-# from rest_framework import routers
+from django.urls import path, include
+from leavestracker.apps.employees.views import EmployeesView
 
-# router = routers.DefaultRouter()
-# router.register(r'employees', views.EmployeesViewSet)
-
-# urlpatterns = [
-#     # url(r'', include(router.urls)),
-# ]
+urlpatterns = [
+    path('employees-data/', EmployeesView.as_view(), name="employee-data"),
+]

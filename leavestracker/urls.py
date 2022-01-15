@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('employees/', include('leavestracker.apps.employees.urls')),
+    path('employees/', include('leavestracker.apps.employees.urls')),
 ]
