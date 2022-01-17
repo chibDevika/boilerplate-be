@@ -8,11 +8,13 @@ from leavestracker.apps.leaves.serializer import LeaveSerializer
 from leavestracker.apps.leaves.models import Leaves
 
 class LeavesView(APIView):
+
     def post(self,request):
         serializer = LeaveSerializer(data=request.data)
         try:
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
+                print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except ValidationError:
@@ -41,9 +43,9 @@ class LeavesView(APIView):
 
     def patch(self, request, id):
         try:
-            leave=Leaves.objects.get(id=id)
-            serializer=LeaveSerializer(leave)
-            if serializer.is_valid(raise_exceptions=True):
+            leaves=Leaves.objects.get(id=id)
+            serializer=LeaveSerializer(leaves ,data=request.data, partial=True)
+            if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
