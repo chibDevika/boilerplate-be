@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'leavestracker.apps.employees.apps.EmployeesConfig',
+    'leavestracker.apps.employees',
+    'leavestracker.apps.leaves',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# AUTH_USER_MODEL = 'leavestracker.CustomUser'
 
 
 # Internationalization
