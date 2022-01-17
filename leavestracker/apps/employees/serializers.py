@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from leavestracker.apps.employees.models import CustomUser, Employees
+from leavestracker.apps.employees.models import CustomUser
 
 class EmployeesSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source="employees.id")
