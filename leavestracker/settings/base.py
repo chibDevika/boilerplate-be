@@ -46,12 +46,11 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -64,9 +63,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CORS_ALLOW_METHODS = [
-    "DELETE",
     "GET",
-    "OPTIONS",
     "PATCH",
     "POST",
     "PUT",
@@ -117,9 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# AUTH_USER_MODEL = 'leavestracker.CustomUser'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

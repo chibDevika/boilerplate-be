@@ -11,7 +11,7 @@ class CustomUser(User):
     def save(self, *args, **kwargs):
         super(CustomUser, self).save(*args, **kwargs)
         if self.id:
-            Employees.objects.create(user = self)
+            Employees.objects.get_or_create(user = self)
 
 
 class Employees(models.Model):
