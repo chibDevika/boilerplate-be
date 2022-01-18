@@ -35,7 +35,7 @@ class Leaves(models.Model):
                 raise ValidationError("A leave already exists in this interval. You may delete the previous entry or change your new dates")
             
         def get_queryset_enddate(self):
-            leaves = Leaves.objects.filter(ended_atrange = [self.started_at, self.ended_at]).first()
+            leaves = Leaves.objects.filter(ended_at__range = [self.started_at, self.ended_at]).first()
             if leaves==None:
                 pass
             else:
