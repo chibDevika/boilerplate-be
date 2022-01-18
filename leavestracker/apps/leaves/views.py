@@ -9,7 +9,6 @@ class LeavesView(APIView):
 
     def post(self,request):
         serializer = LeaveSerializer(data=request.data)
-
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
