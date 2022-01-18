@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from leavestracker.apps.leaves.serializer import LeaveSerializer
 from leavestracker.apps.leaves.models import Leaves
-from rest_framework import serializers
 from leavestracker.apps.leaves import constants
 
 class LeavesView(APIView):
