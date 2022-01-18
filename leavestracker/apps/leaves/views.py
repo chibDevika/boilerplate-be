@@ -23,7 +23,7 @@ class LeavesView(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
         
             except Leaves.DoesNotExist:
-                return Response(constants.leave_does_not_exist, status=status.HTTP_200_OK)
+                return Response(constants.LEAVE_DOES_NOT_EXIST, status=status.HTTP_200_OK)
 
         leaves=Leaves.objects.all()
         serializer=LeaveSerializer(leaves, many=True)
@@ -39,4 +39,4 @@ class LeavesView(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
         except Leaves.DoesNotExist:
-            return Response(constants.leave_does_not_exist, status=status.HTTP_200_OK)
+            return Response(constants.LEAVE_DOES_NOT_EXIST, status=status.HTTP_200_OK)
