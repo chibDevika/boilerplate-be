@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from leavestracker.apps.leaves.models import Leaves
+from rest_framework import serializers
 
 class LeaveSerializer(serializers.ModelSerializer):
     first_name = serializers.ReadOnlyField(source="employee.user.first_name")
