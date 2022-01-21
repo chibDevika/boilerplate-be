@@ -11,7 +11,7 @@ class Leaves(models.Model):
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE)
     started_at = models.DateTimeField()
     ended_at = models.DateTimeField()
-    reason = models.TextField()
+    reason = models.TextField(blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     is_active=models.BooleanField(default=True)
@@ -21,7 +21,7 @@ class Leaves(models.Model):
         if self.ended_at < self.started_at:
             errors.append(constants.END_DATE_BEFORE_START_DATE)
         
-        leaves = Leaves.objects.filter(Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at])).count()
+        leaves = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).count()
         if not leaves==0:
             errors.append(constants.LEAVE_EXISTS)
 

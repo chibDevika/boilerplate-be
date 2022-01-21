@@ -1,10 +1,10 @@
 import json
 import requests
 
-from leavestracker.settings.local import *
+from leavestracker.settings.local import SLACK_WEB_URL
 
 def slack_notification(message, title):
-    url = "https://hooks.slack.com/services/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"
+    url = SLACK_WEB_URL
     slack_data = {
         "username": "AFK Notification",
         "icon_emoji": ":bell:",
