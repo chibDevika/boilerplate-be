@@ -18,6 +18,6 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 app.conf.beat_schedule = {
     "notification_scheduler": {
         "task": "leavestracker.apps.leaves.tasks.afk_employees",
-        "schedule": 15, #crontab(hour=9, minute=0),
+        "schedule": crontab(hour=9, minute=0),
     }
 }
