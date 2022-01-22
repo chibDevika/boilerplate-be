@@ -1,9 +1,12 @@
 from leavestracker.apps.employees.models import CustomUser
+from leavestracker.apps.employees.serializers import EmployeesSerializer
+from leavestracker.apps.employees import constants
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from leavestracker.apps.employees.serializers import EmployeesSerializer
-from leavestracker.apps.employees import constants
+from rest_framework.authtoken.models import Token
+
 
 class EmployeesView(APIView):
     serializer_class = EmployeesSerializer
@@ -17,11 +20,16 @@ class EmployeesView(APIView):
         try:
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-                (data, response_status) = (serializer.data, status.HTTP_201_CREATED)
+                user = self.get_queryset()
+                token, created = Token.objects.create(user=user)
+                response = {"data": serializer.data, "token": token.key}
+                (data, response_status) = (response, status.HTTP_201_CREATED)
         except Exception as ex:
             if str(ex) == constants.SAME_USER_ERROR:
                 user = self.get_queryset()
-                (data, response_status) = (EmployeesSerializer(instance=user).data, status.HTTP_200_OK)
+                token, created = Token.objects.get(user=user)
+                response = {"data": EmployeesSerializer(instance=user).data, "token": token.key}
+                (data, response_status) = (response, status.HTTP_200_OK)
             else:
                 data = [constants.WORK_IN_PROGRESS]
                 (data, response_status) = (data, status.HTTP_500_INTERNAL_SERVER_ERROR)
