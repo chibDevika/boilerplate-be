@@ -6,10 +6,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-
+from rest_framework.permissions import AllowAny
 
 class EmployeesView(APIView):
     serializer_class = EmployeesSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny,]
     
     def get_queryset(self):
         user=CustomUser.objects.filter(username=self.request.data['username']).first()
@@ -21,13 +23,13 @@ class EmployeesView(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 user = self.get_queryset()
-                token, created = Token.objects.create(user=user)
+                token, created  = Token.objects.create(user=user)
                 response = {"data": serializer.data, "token": token.key}
                 (data, response_status) = (response, status.HTTP_201_CREATED)
         except Exception as ex:
             if str(ex) == constants.SAME_USER_ERROR:
                 user = self.get_queryset()
-                token, created = Token.objects.get(user=user)
+                token, created = Token.objects.get_or_create(user=user)
                 response = {"data": EmployeesSerializer(instance=user).data, "token": token.key}
                 (data, response_status) = (response, status.HTTP_200_OK)
             else:
