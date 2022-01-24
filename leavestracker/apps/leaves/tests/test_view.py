@@ -7,14 +7,16 @@ from leavestracker.apps.leaves.models import Leaves
 from leavestracker.apps.employees.models import CustomUser, Employees
 from leavestracker.apps.employees.tests.test_factory import UserFactory
 from leavestracker.apps.leaves.tests.test_factory import LeaveFactory
+from leavestracker.apps.leaves import constants
+
 
 class TestViews(APITestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = reverse('leaves')
     
-    def test_new_leave(self):
-        new_user = UserFactory(username = 'john', first_name = 'john', last_name = 'john', email = 'john@gmail.com')
+    def test_new_leave_addition(self):
+        new_user = UserFactory()
         self.client.force_authenticate(user=new_user)
         new_emp = Employees.objects.get(user_id=new_user.id)
 
@@ -26,9 +28,11 @@ class TestViews(APITestCase):
         }
         response = self.client.post(self.url, data)
         self.assertEquals(response.status_code, 200)
+        emp = Employees.objects.get(user_id=new_emp.id)
+        self.assertEquals(new_emp.id, emp.id)
 
     def test_leave_exists(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
 
@@ -45,7 +49,7 @@ class TestViews(APITestCase):
         self.assertEquals(new_leave, 0)
 
     def test_invalid_dates(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         self.client.force_authenticate(user=user)
         emp = Employees.objects.get(user_id = user.id)
         data = {
@@ -61,7 +65,7 @@ class TestViews(APITestCase):
 
 
     def test_past_dates(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
         data = {
@@ -76,7 +80,7 @@ class TestViews(APITestCase):
         self.assertNotEquals(response.status_code, 200)
 
     def test_get_leave(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
 
@@ -89,17 +93,17 @@ class TestViews(APITestCase):
 
 
     def test_get_leave_does_not_exist(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
 
         url = reverse('leaves', args=[10000000])
         response = self.client.get(url)
         self.assertEquals(response.status_code, 400)
-        
+        self.assertEquals(response.data, constants.LEAVE_DOES_NOT_EXIST)
 
     def test_update_leave(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
 
@@ -119,7 +123,7 @@ class TestViews(APITestCase):
         self.assertEquals(leave_previous, 0)
 
     def update_leave_does_not_exist(self):
-        user = UserFactory(username='Claire', first_name='Claire', last_name='Dunphy', email='sample@gmail.com')
+        user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
         self.client.force_authenticate(user=user)
 
@@ -131,6 +135,4 @@ class TestViews(APITestCase):
         }
         response = self.client.patch(url, data)
         self.assertEquals(response.status_code, 400)
-
-
-    
+        self.assertEquals(response.data, constants.LEAVE_DOES_NOT_EXIST)

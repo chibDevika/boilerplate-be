@@ -42,7 +42,7 @@ class Leaves(models.Model):
             message += (emp.employee.user.first_name + " " + emp.employee.user.last_name + 
                     " email: " + emp.employee.user.email + " (" + emp.started_at.strftime('%Y-%m-%d %H:%M') + 
                     " to " + emp.ended_at.strftime('%Y-%m-%d %H:%M') + "); ")
-        utils.slack_notification(message, constants.SLACK_TITLE)
+        utils.slack_notification(message, constants.AFK_SLACK_TITLE)
 
     @classmethod
     def notify_on_slack_absent_employees(cls):

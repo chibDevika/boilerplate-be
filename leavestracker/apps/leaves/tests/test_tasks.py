@@ -9,8 +9,7 @@ from leavestracker.apps.employees.models import Employees
 from rest_framework.test import APITestCase
 
 class TaskTestCase(APITestCase):
-    @mock.patch('leavestracker.apps.leaves.models.Leaves.slack_notification')
-    def test_celery_task(self, mock_slack_notification):
+    def setUp(self):
         presentday = datetime.now() 
         tomorrow = presentday + timedelta(1)
 
@@ -22,4 +21,6 @@ class TaskTestCase(APITestCase):
         emp2 = Employees.objects.get(user_id = user2.id)
         leave2 = LeaveFactory(employee=emp2, started_at=presentday.strftime('%Y-%m-%d %H:%M'), ended_at=tomorrow.strftime('%Y-%m-%d %H:%M'), reason="Dentist's Appointment")
 
+    @mock.patch('leavestracker.apps.leaves.models.Leaves.slack_notification')
+    def test_celery_task(self, mock_slack_notification):
         response = tasks.Leaves.notify_on_slack_absent_employees()

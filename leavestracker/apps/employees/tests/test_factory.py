@@ -5,3 +5,9 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = CustomUser
         django_get_or_create = ('username', 'first_name', 'last_name', 'email')
+
+    username='Claire',
+    first_name='Claire',
+    last_name='Dunphy',
+    email='sample@gmail.com',
+
