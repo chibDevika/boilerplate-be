@@ -10,4 +10,3 @@ class UserFactory(factory.django.DjangoModelFactory):
     first_name='Claire',
     last_name='Dunphy',
     email='sample@gmail.com',
-

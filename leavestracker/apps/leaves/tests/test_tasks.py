@@ -23,4 +23,5 @@ class TaskTestCase(APITestCase):
 
     @mock.patch('leavestracker.apps.leaves.models.Leaves.slack_notification')
     def test_celery_task(self, mock_slack_notification):
-        response = tasks.Leaves.notify_on_slack_absent_employees()
+        tasks.Leaves.notify_on_slack_absent_employees()
+        self.assertIsNone(tasks.Leaves.notify_on_slack_absent_employees())

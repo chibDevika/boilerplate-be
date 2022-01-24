@@ -15,7 +15,7 @@ class TestModels(APITestCase):
         leave = Leaves.objects.filter(id=leave_qs.id).count()
         self.assertEquals(leave, 1)
 
-    def test_folks_absent_today_query(self):
+    def test_employee_absent_today_query(self):
         presentday = datetime.now() 
         tomorrow = presentday + timedelta(1)
         dayAfterTomorrow = tomorrow + timedelta(1)
