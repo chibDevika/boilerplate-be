@@ -7,10 +7,10 @@ from leavestracker.apps.employees.models import Employees
 from leavestracker.apps.employees.tests.test_factory import UserFactory
 
 class TestModels(APITestCase):
-    def test_create_new_leave_creation(self):
+    def tes_new_leaves(self):
         user = UserFactory()
         emp = Employees.objects.get(user_id = user.id)
-        leave = LeaveFactory(employee=emp, started_at="2022-02-24", ended_at="2022-02-26", reason="holiday")
+        leave = LeaveFactory()
         leave_qs = Leaves.objects.get(employee_id=emp.id)
         leave = Leaves.objects.filter(id=leave_qs.id).count()
         self.assertEquals(leave, 1)
@@ -22,11 +22,11 @@ class TestModels(APITestCase):
         yesterday = presentday - timedelta(1)
         dayBeforeYesterday = yesterday - timedelta(1)
 
-        user1 = UserFactory(username='Ed', first_name='Edward', last_name='Cullen', email='ed@gmail.com')
+        user1 = UserFactory(username='Ed')
         emp1 = Employees.objects.get(user_id=user1.id)
         leave1 = LeaveFactory(employee=emp1, started_at=presentday.strftime('%Y-%m-%d'), ended_at=tomorrow.strftime('%Y-%m-%d'), reason="Vacation")
 
-        user2 = UserFactory(username='Jake', first_name='Jacob', last_name='Black', email='jake@gmail.com')
+        user2 = UserFactory(username='Jake')
         emp2 = Employees.objects.get(user_id=user2.id)
 
         leave2 = LeaveFactory(employee=emp1, started_at=tomorrow.strftime('%Y-%m-%d'), ended_at=dayAfterTomorrow.strftime('%Y-%m-%d'), reason="Dentist's Appointment")

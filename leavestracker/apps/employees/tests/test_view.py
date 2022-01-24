@@ -22,16 +22,15 @@ class TestViews(APITestCase):
         self.assertEquals(user_qs,1)
 
     def test_existing_user(self):
-        user = UserFactory(username='Jason', first_name='Jason', last_name='Holden',email='abc@gmail.com')
+        user = UserFactory()
         data = {
-            'username' : 'Jason',
-            'first_name':'jason',
-            'last_name':'mraz',
-            'email':'abcd@gmail.com'
+            'username' : user.username,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
         }
         response = self.client.post(self.post_url, data)
-        user = CustomUser.objects.filter(username="Jason").count()
+        user = CustomUser.objects.filter(username=user.username).count()
         self.assertEquals(user, 1) 
         self.assertEquals(response.status_code, 200)
         
-

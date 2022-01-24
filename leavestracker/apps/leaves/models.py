@@ -28,7 +28,7 @@ class Leaves(models.Model):
         if self.started_at < timezone.now() or self.ended_at < timezone.now():
             errors.append(constants.PAST_DATE)
 
-        if not len(errors) == 0:
+        if errors:
             raise ValidationError(errors)
 
     @classmethod
