@@ -1,5 +1,5 @@
 import factory
-from leavestracker.apps.employees.models import CustomUser, Employees
+from leavestracker.apps.employees.models import CustomUser
 
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:

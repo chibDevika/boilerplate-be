@@ -1,5 +1,4 @@
 from rest_framework.test import APITestCase
-from django.urls import reverse
 from leavestracker.apps.employees.models import CustomUser, Employees
 from leavestracker.apps.employees.tests.test_factory import UserFactory
 
