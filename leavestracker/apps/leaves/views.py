@@ -1,3 +1,6 @@
+from datetime import datetime
+from django.db.models import Q
+
 from leavestracker.apps.leaves.serializer import LeaveSerializer
 from leavestracker.apps.leaves.models import Leaves
 from leavestracker.apps.leaves import constants
@@ -20,7 +23,7 @@ class LeavesView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
  
 
-    def get(self, request, id=None):
+    def get(self, request, start, end, id=None):
         if id:
             try:
                 leaves=Leaves.objects.get(id=id)
@@ -29,8 +32,9 @@ class LeavesView(APIView):
         
             except Leaves.DoesNotExist:
                 return Response(constants.LEAVE_DOES_NOT_EXIST, status=status.HTTP_400_BAD_REQUEST)
-
-        leaves=Leaves.objects.all()
+        startDate = datetime.strptime(start, '%Y-%m-%d')
+        endDate = datetime.strptime(end, '%Y-%m-%d')
+        leaves=Leaves.objects.filter((Q(started_at__gte=startDate) & Q(started_at__lte=endDate)) | (Q(ended_at__gte=startDate) & Q(ended_at__lte=endDate)))
         serializer=LeaveSerializer(leaves, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
