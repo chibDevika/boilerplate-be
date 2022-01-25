@@ -25,8 +25,6 @@ cryptography==2.9
 distlib==0.3.0
 dj-database-url==0.5.0
 Django==4.0.1
-django-cacheback==2.0.0
-django-celery-beat==2.2.1
 django-cors-headers==3.11.0
 django-cors-middleware==1.5.0
 django-crispy-forms==1.9.0
