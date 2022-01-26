@@ -23,10 +23,10 @@ class LeavesView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
  
 
-    def get(self, request, start, end, id=None):
+    def get(self, request, start=None, end=None, id=None):
         if id:
             try:
-                leaves=Leaves.objects.get(id=id)
+                leaves=Leaves.objects.get(employee_id=id)
                 serializer=LeaveSerializer(leaves)
                 return Response(serializer.data, status=status.HTTP_200_OK)
         
@@ -39,7 +39,7 @@ class LeavesView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-    def patch(self, request, id):
+    def patch(self, request, id=None):
         try:
             leaves=Leaves.objects.get(id=id)
             serializer=LeaveSerializer(leaves ,data=request.data, partial=True)
