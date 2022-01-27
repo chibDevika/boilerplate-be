@@ -71,7 +71,6 @@ instance/
 # Developer
 .pydevproject
 .project
-.settings/
 .idea/
 .DS_Store
 *~
