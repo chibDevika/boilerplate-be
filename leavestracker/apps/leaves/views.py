@@ -42,7 +42,7 @@ class LeavesView(APIView):
     def patch(self, request, id=None):
         try:
             leaves=Leaves.objects.get(id=id)
-            serializer=LeaveSerializer(leaves ,data=request.data, partial=True)
+            serializer=LeaveSerializer(leaves, data=request.data, partial=True)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)

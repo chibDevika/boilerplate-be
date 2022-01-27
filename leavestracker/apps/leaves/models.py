@@ -21,9 +21,14 @@ class Leaves(models.Model):
         if self.ended_at < self.started_at:
             errors.append(constants.END_DATE_BEFORE_START_DATE)
         
-        leaves = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).count()
-        if not leaves==0:
-            errors.append(constants.LEAVE_EXISTS)
+        if not self.id: #for posting new leave
+            leaves = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).count()
+            if not leaves==0:
+                errors.append(constants.LEAVE_EXISTS)
+        else: #for updating leave
+            update_leave = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).exclude(id=self.id).count()
+            if not update_leave==0:
+                errors.append(constants.LEAVE_EXISTS)
 
         if self.started_at < timezone.now() or self.ended_at < timezone.now():
             errors.append(constants.PAST_DATE)
