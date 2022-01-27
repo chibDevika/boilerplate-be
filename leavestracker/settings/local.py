@@ -1,5 +1,6 @@
 from leavestracker.settings.base import *
 
+
 DEBUG = True
 
 SITE_URL = "localhost:8000"
