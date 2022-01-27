@@ -1,4 +1,3 @@
-**/settings/local.py
 .env
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -59,7 +58,6 @@ coverage.xml
 
 # Django stuff:
 *.log
-local.py
 db.sqlite3
 db.sqlite3-journal
 
