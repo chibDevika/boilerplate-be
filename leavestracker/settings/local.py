@@ -27,18 +27,18 @@ SITE_URL = "localhost:8000"
 DATABASES = {
             "default": {
                         "ENGINE": DB_ENGINE,
-                                "NAME": "d546mov0jsogdj",
-                                        "USER": "qtrcsrbixkupjb",
-                                                "PASSWORD": "49bc45924ba1dfd760bb6369d40b749fb452a2bf93ca7fb9c8df1c65d612038f",
-                                                        "HOST": "ec2-34-193-235-32.compute-1.amazonaws.com",
+                                "NAME": "d4qht1tndjqro7",
+                                        "USER": "byerynhvowpzik",
+                                                "PASSWORD": "24f330a0c7552adf67eedb0a3db93b896e627acd1885850ba6924262c64dad46",
+                                                        "HOST": "ec2-184-73-243-101.compute-1.amazonaws.com",
                                                                 "PORT": "5432",
                                                                     },
                 "readonly": {
                             "ENGINE": DB_ENGINE,
-                                    "NAME": "d546mov0jsogdj",
-                                            "USER": "qtrcsrbixkupjb",
-                                                    "PASSWORD": "49bc45924ba1dfd760bb6369d40b749fb452a2bf93ca7fb9c8df1c65d612038f",
-                                                            "HOST": "ec2-34-193-235-32.compute-1.amazonaws.com",
+                                    "NAME": "d4qht1tndjqro7",
+                                            "USER": "byerynhvowpzik",
+                                                    "PASSWORD": "24f330a0c7552adf67eedb0a3db93b896e627acd1885850ba6924262c64dad46",
+                                                            "HOST": "ec2-184-73-243-101.compute-1.amazonaws.com",
                                                                     "PORT": "5432",
                                                                         }
                 }
