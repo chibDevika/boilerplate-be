@@ -8,7 +8,7 @@ class LeaveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Leaves
-        fields = ['employee','id','started_at','ended_at','reason','first_name','last_name','email']
+        fields = ['employee','id','started_at','ended_at','reason','first_name','last_name','email','is_active']
 
     def validate(self, attrs):
         if(self.instance):
