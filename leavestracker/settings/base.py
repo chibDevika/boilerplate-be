@@ -61,6 +61,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://devika-leave-tracker.herokuapp.com'
 )
 
 CORS_ALLOW_METHODS = [
