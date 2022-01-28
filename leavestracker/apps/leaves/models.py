@@ -22,11 +22,11 @@ class Leaves(models.Model):
             errors.append(constants.END_DATE_BEFORE_START_DATE)
         
         if not self.id: #for posting new leave
-            leaves = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).count()
+            leaves = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).exclude(is_active=False).count()
             if not leaves==0:
                 errors.append(constants.LEAVE_EXISTS)
         else: #for updating leave
-            update_leave = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).exclude(id=self.id).count()
+            update_leave = Leaves.objects.filter(Q(employee_id = self.employee_id) & (Q(started_at__range = [self.started_at, self.ended_at]) | Q(ended_at__range = [self.started_at, self.ended_at]))).exclude(id=self.id).exclude(is_active=False).count()
             if not update_leave==0:
                 errors.append(constants.LEAVE_EXISTS)
 
@@ -38,7 +38,7 @@ class Leaves(models.Model):
 
     @classmethod
     def absent_employees(cls):
-        return cls.objects.filter(Q(started_at__date__lte = timezone.now().date()) & Q(ended_at__date__gte=timezone.now().date()))
+        return cls.objects.filter(Q(started_at__date__lte = timezone.now().date()) & Q(ended_at__date__gte=timezone.now().date())).exclude(is_active=False)
 
     @staticmethod
     def slack_notification(employees):
