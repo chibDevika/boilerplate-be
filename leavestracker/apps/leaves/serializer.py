@@ -11,9 +11,11 @@ class LeaveSerializer(serializers.ModelSerializer):
         fields = ['employee','id','started_at','ended_at','reason','first_name','last_name','email','is_active']
 
     def validate(self, attrs):
+        instance = Leaves(**attrs)
         if(self.instance):
-            instance = self.instance
-        else:
-            instance = Leaves(**attrs)
+            instance.id = self.instance.id
+            instance.started_at = attrs['started_at']
+            instance.ended_at = attrs['ended_at']
+            instance.reason = attrs['reason']
         instance.clean()
         return attrs
